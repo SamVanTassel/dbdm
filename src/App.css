@@ -1,4 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,700;1,700&display=swap');
 html {
-  background-color: lightgoldenrodyellow;
-  color: goldenrod;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Kanit', sans-serif;
+  background-color: rgb(144, 110, 160);
+}
+
+h1 {
+  font-size: 6rem;
+  margin: .5rem;
+  padding: .25rem;
+}
+
+input {
+  background: transparent;
+  border: none;
+  margin: 2px;
+  color: wheat;
+  width: 42px;
+  text-align: center;
+  border: dashed wheat;
+}
+
+.track {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.mute {
+  font-size: .75rem;
+  font-style: italic;
+  height: 50px;
+  width: 50px;
+  border-radius: 4px;
+  border-color: wheat;
+  border-style: dashed;
+  background-color: rgb(144, 110, 160);
+  color: rgba(255, 237, 203, 0.616);
+  margin: 2px;
+}
+
+.pad, 
+.pad4 {
+  min-width: 25px;
+  max-width: 50px;
+  flex-basis: 100%;
+  height: 50px;
+  width: 50px;
+  border-radius: 4px;
+  border-style: none;
+  background-color:rgb(150, 99, 163);
+  color: wheat;
+  box-shadow: 2px 2px wheat;
+  margin: 2px;
+}
+
+.pad4 {
+  background-color:rgb(140, 90, 155);
+}
+
+.pad:hover,
+.pad4:hover {
+  box-shadow: 1px 1px;
+  /* padding-top: 3px;
+  padding-left: 3px; */
+}
+.pad:active,
+.pad4:active,
+.active {
+  box-shadow: 1px 1px;
+  background-color: wheat;
+  color:rgb(150, 99, 163);
+}
+
+.db {
+  font-size: .75rem;
+  font-style: italic;
+  height: 50px;
+  width: 50px;
+  border-radius: 4px;
+  border-style: none;
+  background-color:rgb(144, 110, 160);
+  color: rgba(255, 237, 203, 0.616);
+  box-shadow: 2px 2px rgba(245, 222, 179, 0.767);
+  margin: 2px;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#main {
+  width: 90%;
+  color: wheat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#tracksContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }

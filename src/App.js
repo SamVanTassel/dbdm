@@ -8,11 +8,11 @@ function App() {
   const [count, setCount] = useState(0);
   
   useEffect(() => {
-    document.title = `You clicked ${count} times`;
+    document.title = `Ding Dang Application`;
   })
 
   return (
-    <div> 
+    <div id="main"> 
       <h1>DBDM</h1>
       <TracksContainer />
     </div>
