@@ -1,7 +1,6 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
 
-function Mute(props) {
+const Mute = (props) => {
 
   function myFunc() {
     fetch('/api/mute')
@@ -12,4 +11,4 @@ function Mute(props) {
   return <button className="mute" onClick={() => myFunc()}>{props.sound}</button>
 }
 
-export default hot(module)(Mute);
+export default Mute;

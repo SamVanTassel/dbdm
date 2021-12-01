@@ -1,8 +1,7 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
-import Track from './Track'
+import Track from './Track.jsx'
 
-function TracksContainer() {
+const TracksContainer = () => {
   const tracks = ['OH', 'CH', 'SD', 'BD'];
 
   return (
@@ -14,4 +13,4 @@ function TracksContainer() {
   );
 };
 
-export default hot(module)(TracksContainer);
+export default TracksContainer;

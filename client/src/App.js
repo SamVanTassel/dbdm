@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { hot } from 'react-hot-loader';
 import './App.css';
-import TracksContainer from './components/TracksContainer';
+import TracksContainer from './components/TracksContainer.jsx';
 
-function App() {
+const App = () => {
 
-  const [count, setCount] = useState(0);
-  
   useEffect(() => {
     document.title = `Ding Dang Application`;
   })
@@ -20,4 +17,4 @@ function App() {
   );
 }
 
-export default hot(module)(App);
+export default App;

@@ -1,21 +1,24 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
 
-function Save(props) {
+const Save = (props) => {
 
-  function save(pattern, slot) {
-    fetch('/api/memory', 
+  const savePattern = (bank, slot, pattern) => {
+    fetch(`/api/memory/${bank}/${slot}`, 
       { 
         method: 'POST', 
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ 'pattern': pattern, 'slot': slot }) 
+        body: JSON.stringify({ 'pattern': pattern }) 
       })
       .then(response => response.json())
       .then(res => console.log(res.message))
       .catch(err => console.log(err));
   }
 
-  return <button className="db" onClick={() => save(props.pattern, props.slot)}>SAVE</button>
+  return <button 
+          className="db" 
+          onClick={() => savePattern(props.bank, props.slot, props.pattern)}>
+            SAVE
+          </button>
 }
 
-export default hot(module)(Save);
+export default Save;

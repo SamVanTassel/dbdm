@@ -1,11 +1,17 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
 
-function Load(props) {
+const Load= (props) => {
 
+  const loadPattern = (bank, slot) => {
+    fetch(`/api/memory/${bank}/${slot}`)
+      .then(response => response.json())
+      .then(res => {
+        props.updatePattern(res.pattern)
+      })
+      .catch(err => console.log(err));
+  }
 
-
-  return <button className="db">LOAD</button>
+  return <button className="db" onClick={() => {loadPattern(props.bank, props.slot)}}>LOAD</button>
 }
 
-export default hot(module)(Load);
+export default Load;

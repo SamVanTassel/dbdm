@@ -22,31 +22,18 @@ h1 {
 
 input {
   background: transparent;
-  border: none;
+  border: 1px solid rgb(243, 220, 179, .5);
+  border-radius: 4px;
   margin: 2px;
   color: wheat;
   width: 42px;
   text-align: center;
-  border: dashed wheat;
 }
 
 .track {
   display: flex;
   justify-content: center;
   flex-wrap: nowrap;
-}
-
-.mute {
-  font-size: .75rem;
-  font-style: italic;
-  height: 50px;
-  width: 50px;
-  border-radius: 4px;
-  border-color: wheat;
-  border-style: dashed;
-  background-color: rgb(144, 110, 160);
-  color: rgba(255, 237, 203, 0.616);
-  margin: 2px;
 }
 
 .pad, 
@@ -68,12 +55,15 @@ input {
   background-color:rgb(140, 90, 155);
 }
 
+.mute:hover,
+.db:hover,
 .pad:hover,
 .pad4:hover {
   box-shadow: 1px 1px;
   /* padding-top: 3px;
   padding-left: 3px; */
 }
+
 .pad:active,
 .pad4:active,
 .active {
@@ -82,13 +72,14 @@ input {
   color:rgb(150, 99, 163);
 }
 
-.db {
+.db,
+.mute {
   font-size: .75rem;
   font-style: italic;
   height: 50px;
   width: 50px;
   border-radius: 4px;
-  border-style: none;
+  border: 1px solid rgb(243, 220, 179, .25);
   background-color:rgb(144, 110, 160);
   color: rgba(255, 237, 203, 0.616);
   box-shadow: 2px 2px rgba(245, 222, 179, 0.767);

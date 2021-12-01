@@ -1,6 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+
+const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: './client/src/index.js',
@@ -10,8 +13,11 @@ module.exports = {
       {
         test: /\.(jsx?)$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        options: { presets: ['@babel/env'] }
+        loader: require.resolve('babel-loader'),
+        options: { 
+          presets: ['@babel/env'],
+          plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(Boolean)
+        }
       },
       {
         test: /\.css$/,
@@ -37,7 +43,7 @@ module.exports = {
     hot: true
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '/client/public/index.html/')
     }),

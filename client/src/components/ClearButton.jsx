@@ -1,7 +1,6 @@
 import React from 'react';
-import { hot } from 'react-hot-loader';
 
-function Clear(props) {
+const Clear = (props) => {
 
   function clearPattern() {
     props.updatePattern(new Array(16).fill(false));
@@ -14,4 +13,4 @@ function Clear(props) {
           </button>
 }
 
-export default hot(module)(Clear);
+export default Clear;

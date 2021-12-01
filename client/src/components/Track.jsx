@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { hot } from 'react-hot-loader';
-import Mute from './MuteButton';
-import Load from './LoadButton';
-import Clear from './ClearButton';
-import Save from './SaveButton';
+import React, { useState } from 'react';
+import Mute from './MuteButton.jsx';
+import Load from './LoadButton.jsx';
+import Clear from './ClearButton.jsx';
+import Save from './SaveButton.jsx';
 
-function Track(props) {
+const Track = (props) => {
   // Create 16 step array in state
   const [pattern, updatePattern] = useState(new Array(16).fill(false));
   const [memoryNumber, updateMemory] = useState(1);
@@ -39,11 +38,11 @@ function Track(props) {
       <Mute sound={props.sound} />
       {pads}
       <Clear updatePattern={updatePattern}>CLR</Clear>
-      <Save pattern={pattern} slot={memoryNumber}>SAVE</Save>
-      <Load pattern={pattern} slot={memoryNumber} updatePattern={updatePattern}>LOAD</Load>
-      <input type="number" value={memoryNumber} onChange={(e) => changeSlot(e)}></input>
+      <Save pattern={pattern} bank={props.sound} slot={memoryNumber}>SAVE</Save>
+      <Load bank={props.sound} slot={memoryNumber} updatePattern={updatePattern}>LOAD</Load>
+      <input type="number" min="0" max="8" value={memoryNumber} onChange={(e) => changeSlot(e)}></input>
     </div>
   );
 };
 
-export default hot(module)(Track);
+export default Track;
