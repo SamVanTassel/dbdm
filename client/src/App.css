@@ -1,17 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,700;1,700&display=swap');
 html {
   box-sizing: border-box;
+  height: 100%;
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
   font-family: 'Kanit', sans-serif;
-  background-color: rgb(144, 110, 160);
+  background: rgb(144,110,160);
+  background: linear-gradient(180deg, rgb(129, 95, 145) 0%, rgba(144,110,160,1) 20%, rgba(144,110,160,1) 70%, rgb(129, 95, 145) 100%);
 }
 
 h1 {
   font-size: 6rem;
   margin: .5rem;
   padding: .25rem;
+  text-shadow: 4px 4px rgb(129, 95, 145);
 }
 
 input {
@@ -26,6 +32,7 @@ input {
 
 .track {
   display: flex;
+  justify-content: center;
   flex-wrap: nowrap;
 }
 
@@ -88,22 +95,36 @@ input {
   margin: 2px;
 }
 
+body:before {
+  content: '';
+  flex: 1;
+}
+
+body:after {
+  flex: 2;
+  content: '';
+}
+
 #root {
+  margin: 0 auto;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 #main {
-  width: 90%;
+  width: 95%;
   color: wheat;
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 25px;
+  box-shadow: 2px 2px 4px rgb(129, 95, 145), -2px -2px 4px rgb(129, 95, 145);
+  max-width: 1350px;
 }
 
 #tracksContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 95%;
 }

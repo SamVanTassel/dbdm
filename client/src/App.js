@@ -15,6 +15,7 @@ function App() {
     <div id="main"> 
       <h1>DBDM</h1>
       <TracksContainer />
+      <p>x x x x . x x x x . x x x x . x x x x</p>
     </div>
   );
 }

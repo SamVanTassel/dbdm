@@ -4,16 +4,12 @@ import Track from './Track'
 
 function TracksContainer() {
   const tracks = ['OH', 'CH', 'SD', 'BD'];
-  tracks.map((sound, i) => {
-    return <Track className="track" key={`track${i}`} sound={sound}/>;
-  });
+
   return (
     <div id="tracksContainer">
-      {
-      tracks.map((sound, i) => {
-        return <Track className="track" key={`track${i}`} sound={sound}/>;
-      })
-       }
+      {tracks.map((sound, i) => {
+          return <Track className="track" key={`track${i}`} sound={sound}/>;
+      })}
     </div>
   );
 };

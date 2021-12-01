@@ -3,7 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './client/src/index.js',
   mode: 'development',
   module: {
     rules: [
@@ -30,13 +30,16 @@ module.exports = {
       directory: path.join(__dirname, 'public/'),
       publicPath: '/dist/'
     },
+    proxy: {
+      '/api': 'http://localhost:8080'
+    },
     port: 3000,
     hot: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, '/public/index.html/')
+      template: path.join(__dirname, '/client/public/index.html/')
     }),
   ]
 };
