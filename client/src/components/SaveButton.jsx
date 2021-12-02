@@ -9,8 +9,6 @@ const Save = (props) => {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ 'pattern': pattern }) 
       })
-      .then(response => response.json())
-      .then(res => console.log(res.message))
       .catch(err => console.log(err));
   }
 

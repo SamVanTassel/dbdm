@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
-import * as pc from '../controllers/pattern.js';
+import { loadPattern, savePattern } from '../controllers/pattern.js';
 
-router.get('/memor/:bank/:slot', pc.loadPattern);
-router.post('/memory/:bank/:slot', pc.savePattern);
+router.get('/memory/:bank/:slot', loadPattern);
+router.post('/memory/:bank/:slot', savePattern);
 
 export default router;
