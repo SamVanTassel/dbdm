@@ -6,8 +6,7 @@ import routes from './routes/pattern.js';
 // set up default mongoose connection
 import mongoose from 'mongoose';
 const MONGO_URI = 'mongodb+srv://test:test@cluster0.dccrw.mongodb.net/dbdm?retryWrites=true&w=majority';
-mongoose
-  .connect(MONGO_URI, {
+mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -18,10 +17,12 @@ mongoose
 app.use(express.json());
 app.use(express.urlencoded());
 
+// dummy mute functionality
 app.get('/api/mute', (req, res) => {
   res.json({ message: 'total silence'});
 });
 
+// route all other calls to pattern router
 app.use('/api', routes);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

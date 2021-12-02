@@ -3,12 +3,13 @@ const { Schema } = mongoose;
 
 // define pattern schema
 const patternSchema = new Schema({
-  pattern: { type: [], required: true },
+  pattern: { type: String, required: true },
   slot: { 
     type: Number, 
     min: [1, 'slot must be greater than 0'], 
     max: [8, 'there are only 8 slots available'], 
-    required: true 
+    required: true,
+    unique: true
   },
   name: String
 })

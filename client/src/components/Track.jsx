@@ -38,8 +38,16 @@ const Track = (props) => {
       <Mute sound={props.sound} />
       {pads}
       <Clear updatePattern={updatePattern}>CLR</Clear>
-      <Save pattern={pattern} bank={props.sound} slot={memoryNumber}>SAVE</Save>
-      <Load bank={props.sound} slot={memoryNumber} updatePattern={updatePattern}>LOAD</Load>
+      <Save 
+        pattern={pattern} bank={props.sound} trackIndex = {props.index}
+        slot={memoryNumber} changeWords={props.changeWords} >
+          SAVE
+      </Save>
+      <Load 
+        bank={props.sound} slot={memoryNumber} trackIndex = {props.index}
+        updatePattern={updatePattern} changeWords={props.changeWords}>
+          LOAD
+      </Load>
       <input type="number" min="0" max="8" value={memoryNumber} onChange={(e) => changeSlot(e)}></input>
     </div>
   );
