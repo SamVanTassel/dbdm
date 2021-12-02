@@ -8,7 +8,7 @@
     "test": "test",
     "start": "webpack-dev-server --mode development",
     "build": "webpack --mode production",
-    "dev": "nodemon server/index.js"
+    "dev": "nodemon server/server.js"
   },
   "author": "Sam VanTassel",
   "license": "ISC",

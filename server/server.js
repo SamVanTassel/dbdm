@@ -1,7 +1,7 @@
 import express from 'express';
 const app = express();
 const PORT = process.env.PORT || 8080;
-import router from './router.js';
+import routes from './routes/pattern.js';
 
 // set up default mongoose connection
 import mongoose from 'mongoose';
@@ -22,6 +22,8 @@ mongoose
 // middleware to show us request bodies
 app.use(express.json());
 app.use(express.urlencoded());
+
+app.use('/', routes);
 
 app.get('/api/mute', (req, res) => {
   res.json({ message: 'total silence'});
