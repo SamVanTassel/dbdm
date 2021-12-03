@@ -2,10 +2,12 @@ import express from 'express';
 const app = express();
 const PORT = process.env.PORT || 8080;
 import routes from './routes/pattern.js';
+import dotenv from 'dotenv';
+dotenv.config();
 
 // set up default mongoose connection
 import mongoose from 'mongoose';
-const MONGO_URI = 'mongodb+srv://test:test@cluster0.dccrw.mongodb.net/dbdm?retryWrites=true&w=majority';
+const MONGO_URI = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.dccrw.mongodb.net/dbdm?retryWrites=true&w=majority`;
 mongoose.connect(MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,

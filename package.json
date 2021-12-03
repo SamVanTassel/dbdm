@@ -13,6 +13,7 @@
   "author": "Sam VanTassel",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^10.0.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "express": "^4.17.1",
     "mongoose": "^6.0.14",
