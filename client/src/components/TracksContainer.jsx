@@ -7,7 +7,12 @@ const TracksContainer = (props) => {
   return (
     <div id="tracksContainer">
       {tracks.map((sound, i) => {
-          return <Track className="track" key={`track${i}`} sound={sound} index={i} changeWords={props.changeWords} />;
+          return (
+            <Track 
+              className="track" key={`track${i}`} 
+              sound={sound} index={i} words={props.words}
+              changeWords={props.changeWords} />
+          );
       })}
     </div>
   );

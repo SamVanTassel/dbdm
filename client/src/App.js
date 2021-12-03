@@ -21,7 +21,7 @@ const App = () => {
   return (
     <div id="main"> 
       <h1>DBDM</h1>
-      <TracksContainer tracks={tracks} changeWords={alterWords} />
+      <TracksContainer tracks={tracks} words={words} changeWords={alterWords} />
       <p>{words.join(' . ')}</p>
     </div>
   );

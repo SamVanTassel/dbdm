@@ -1,17 +1,19 @@
 import React from 'react';
 
 const Save = (props) => {
-  // SEND PATTERN AS STRING OF X's (true) and .'s (false)
+  // Send pattern as string of X's (true) and .'s (false) for legibility and easy comparison
   const savePattern = (bank, slot, pattern) => {
     fetch(`/api/memory/${bank}/${slot}`, 
       { 
         method: 'POST', 
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({ 'pattern': pattern.join('').replace(/true/g, 'X').replace(/false/g, '.') }) 
+        body: JSON.stringify({ 
+          'pattern': pattern.join('').replace(/true/g, 'X').replace(/false/g, '.'),
+          name: props.words[props.trackIndex]
+        }) 
       })
       .then(response => response.json())
       .then(res => {
-        console.log(res);
         if (res.name) props.changeWords(props.trackIndex, res.name)
         else props.changeWords(props.trackIndex, 'xxxx');
       })

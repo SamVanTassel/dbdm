@@ -1,10 +1,9 @@
 import React from 'react';
 
 const Load= (props) => {
-  // helper function to convert data from string to array for react components
+  // Helper function to convert data from string to array for react components
   function dataStringToArray(string) {
     const arr = string.split('')
-    console.log(arr);
     return arr.map((el) => {
       if (el === 'X') return true;
       if (el === '.') return false;
@@ -16,10 +15,9 @@ const Load= (props) => {
     fetch(`/api/memory/${bank}/${slot}`)
       .then(response => response.json())
       .then(res => {
-        // update state with parsed response data
+        // Update state with parsed response data
         props.updatePattern(dataStringToArray(res.pattern));
-        if (res.name) props.changeWords(props.trackIndex, res.name)
-        else props.changeWords(props.trackIndex, 'xxxx');
+        props.changeWords(props.trackIndex, res.name);
       })
       .catch(err => console.log(err));
   }

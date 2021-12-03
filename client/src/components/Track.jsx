@@ -40,7 +40,7 @@ const Track = (props) => {
       <Clear updatePattern={updatePattern}>CLR</Clear>
       <Save 
         pattern={pattern} bank={props.sound} trackIndex = {props.index}
-        slot={memoryNumber} changeWords={props.changeWords} >
+        slot={memoryNumber} words={props.words} changeWords={props.changeWords} >
           SAVE
       </Save>
       <Load 
@@ -48,7 +48,7 @@ const Track = (props) => {
         updatePattern={updatePattern} changeWords={props.changeWords}>
           LOAD
       </Load>
-      <input type="number" min="0" max="8" value={memoryNumber} onChange={(e) => changeSlot(e)}></input>
+      <input type="number" min="1" max="8" value={memoryNumber} onChange={(e) => changeSlot(e)}></input>
     </div>
   );
 };
