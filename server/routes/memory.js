@@ -14,8 +14,8 @@ router.get('/:bank/:slot',
 // ON POST REQUEST, SAVE PATTERN
 router.post('/:bank/:slot', 
   deletePatternIfEmpty,
-  generateRandomWord,
   loadPattern,
+  generateRandomWord,
   saveNewPattern,
   updatePattern,
   (req, res) => res.json({
