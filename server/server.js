@@ -19,6 +19,10 @@ mongoose.connect(MONGO_URI, {
 app.use(express.json());
 app.use(express.urlencoded());
 
+// dummy mute functionality
+app.get('/mute', (req, res) => {
+  res.json({ message: 'total silence'});
+});
 app.use('/', () => console.log('got'))
 // route all other calls to pattern router
 app.use('/memory', memoryRouter);
