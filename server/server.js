@@ -1,7 +1,7 @@
 import express from 'express';
 const app = express();
 const PORT = process.env.PORT || 8080;
-import routes from './routes/pattern.js';
+import memoryRouter from './routes/memory.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -20,11 +20,11 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 // dummy mute functionality
-app.get('/api/mute', (req, res) => {
+app.get('/mute', (req, res) => {
   res.json({ message: 'total silence'});
 });
-
+app.use('/', () => console.log('got'))
 // route all other calls to pattern router
-app.use('/api', routes);
+app.use('/memory', memoryRouter);
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

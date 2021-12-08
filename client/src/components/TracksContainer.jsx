@@ -9,8 +9,8 @@ const TracksContainer = (props) => {
       {tracks.map((sound, i) => {
           return (
             <Track 
-              className="track" key={`track${i}`} 
-              sound={sound} index={i} words={props.words}
+              className="track" key={`track${i}`} mp3={sound.mp3}
+              name={sound.id} index={i} words={props.words}
               changeWords={props.changeWords} />
           );
       })}

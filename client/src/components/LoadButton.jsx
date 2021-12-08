@@ -12,7 +12,7 @@ const Load= (props) => {
   
 
   const loadPattern = (bank, slot) => {
-    fetch(`/api/memory/${bank}/${slot}`)
+    fetch(`/memory/${bank}/${slot}`)
       .then(response => response.json())
       .then(res => {
         // Update state with parsed response data

@@ -3,11 +3,24 @@ import Mute from './MuteButton.jsx';
 import Load from './LoadButton.jsx';
 import Clear from './ClearButton.jsx';
 import Save from './SaveButton.jsx';
+import * as Tone from 'tone';
+
+Tone.Transport.bpm.value =80;
 
 const Track = (props) => {
+
   // Create 16 step array in state
   const [pattern, updatePattern] = useState(new Array(16).fill(false));
   const [memoryNumber, updateMemory] = useState(1);
+
+  // cycle through pattern and play notes
+  const player = new Tone.Player(props.mp3).toDestination();
+  const loop = new Tone.Loop((time, step = 0) => {
+    if (pattern[step]) player.start();
+    step = step + 1 % 16
+  }, "4n");
+  Tone.Transport.start();
+  loop.start(0)
 
   // Toggle pad and update state with new pattern
   function turnOn(id) {
@@ -35,16 +48,16 @@ const Track = (props) => {
 
   return (
     <div className="track">
-      <Mute sound={props.sound} />
+      <Mute name={props.name} mp3={props.mp3} />
       {pads}
       <Clear updatePattern={updatePattern}>CLR</Clear>
       <Save 
-        pattern={pattern} bank={props.sound} trackIndex = {props.index}
+        pattern={pattern} bank={props.name} trackIndex = {props.index}
         slot={memoryNumber} words={props.words} changeWords={props.changeWords} >
           SAVE
       </Save>
       <Load 
-        bank={props.sound} slot={memoryNumber} trackIndex = {props.index}
+        bank={props.name} slot={memoryNumber} trackIndex = {props.index}
         updatePattern={updatePattern} changeWords={props.changeWords}>
           LOAD
       </Load>

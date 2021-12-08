@@ -3,7 +3,7 @@ import React from 'react';
 const Save = (props) => {
   // Send pattern as string of X's (true) and .'s (false) for legibility and easy comparison
   const savePattern = (bank, slot, pattern) => {
-    fetch(`/api/memory/${bank}/${slot}`, 
+    fetch(`/memory/${bank}/${slot}`, 
       { 
         method: 'POST', 
         headers: {'Content-Type': 'application/json'},
