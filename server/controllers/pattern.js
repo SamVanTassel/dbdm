@@ -11,11 +11,7 @@ const savePattern = (req, res, next) => {
     2) [X] If slot exists and sent pattern is same as pattern found at slot, don't update
     3) [X] If slot exists and sent pattern is different than pattern found at slot, update pattern and name
   */
-    // SAVE NOT YET USED RANDOM WORD FOR NAMING PURPOSES
-  const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
-  while (usedWords.includes(randomWord)) { randomWord = wordList[Math.floor(Math.random() * wordList.length)];}
-  usedWords.push(randomWord);
-
+ 
   // FIND DOCUMENT MATCHING SLOT
   Pattern.findOne({ slot: req.params.slot })
     .then(stored => {
@@ -34,6 +30,33 @@ const savePattern = (req, res, next) => {
     })
     .catch(err => console.log(err));
 };
+
+const generateRandomWord = (req, res, next) => {
+  const randomWord = wordList[Math.floor(Math.random() * wordList.length)];
+  while (usedWords.includes(randomWord)) { randomWord = wordList[Math.floor(Math.random() * wordList.length)];}
+  usedWords.push(randomWord);
+  res.locals.randomWord = randomWord;
+  return next();
+}
+
+const loadSlot = (req, res, next) => {
+  Pattern.findOne({ slot: req.params.slot })
+    .then(maybeFound => {
+      res.locals.found = maybeFound;
+      return next();
+    })
+    .catch(err => {
+      console.log(err)
+      return next(err);
+    })
+}
+const saveNewPattern = (req, res, next) => {
+  console.log('in saveNewPattern middleware. res.locals.maybeFound should be empty object string or null or something: ' + res.locals.maybeFound)
+  if (!res.locals.maybeFound) { // IF ONE DOESN'T EXIST, CREATE ONE W/ PASSED IN PATTERN AND RANDOM NAME
+    console.log('created new pattern!');
+    return Pattern.create({ slot: req.params.slot, pattern: req.body.pattern, name: randomWord })
+  }
+}
 
 const deletePatternIfEmpty = (req, res, next) => {
   if (req.body.pattern === '................') {
@@ -68,4 +91,4 @@ const loadPattern = (req, res, next) => {
     })   
 };
 
-export { savePattern, deletePatternIfEmpty, loadPattern }
+export { savePattern, deletePatternIfEmpty, loadPattern, generateRandomWord }
