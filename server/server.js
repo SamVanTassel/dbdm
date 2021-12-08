@@ -19,11 +19,10 @@ mongoose.connect(MONGO_URI, {
 app.use(express.json());
 app.use(express.urlencoded());
 
-app.use('/', () => console.log('got'))
-
+// route memory calls to memory router
 app.use('/memory', memoryRouter);
 
-// 404 error handler
+// route all other calls to 404 error handler
 app.use((req, res) => res.status(404).send('Endpoint could not be found'));
 
 // global error handler
