@@ -19,12 +19,22 @@ mongoose.connect(MONGO_URI, {
 app.use(express.json());
 app.use(express.urlencoded());
 
-// dummy mute functionality
-app.get('/mute', (req, res) => {
-  res.json({ message: 'total silence'});
-});
 app.use('/', () => console.log('got'))
-// route all other calls to pattern router
+
 app.use('/memory', memoryRouter);
+
+// 404 error handler
+app.use((req, res) => res.status(404).send('Endpoint could not be found'));
+
+// global error handler
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'A default server error occurred: ' + err,
+    status: 500,
+    message: { err: 'Default server error' },
+  };
+  const errorObj = Object.assign({}, defaultErr, err);
+  return res.status(errorObj.status).json(errorObj.message);
+});
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))
