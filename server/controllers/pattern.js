@@ -38,7 +38,7 @@ const loadPattern = (req, res, next) => {
 const saveNewPattern = (req, res, next) => {
   console.log('checking if new pattern should be created');
   // expects {name, pattern, randomWord} in res.locals
-  if (res.locals.name === 'xxxx' && !res.locals.justDeleted) { // IF NAME IS 'xxxx', CREATE NEW PATTERN W/ PASSED IN PATTERN AND RANDOM NAME
+  if (res.locals.name === 'xxxx' && !res.locals.justDeleted) { // IF NAME IS 'xxxx' AND IT WASN't JUST DELETED, CREATE NEW PATTERN W/ PASSED IN PATTERN AND RANDOM NAME
     console.log('creating new pattern');
     Pattern.create({ slot: req.params.slot, pattern: req.body.pattern, name: res.locals.randomWord })
       .then((data) => {
@@ -63,7 +63,11 @@ const updatePattern = (req, res, next) => {
     } else {   
       console.log('updating pattern')                       // IF DOC EXISTS AND PATTERN IS DIFFERENT, UPDATE PATTERN AND NAME
       Pattern.findOneAndUpdate({ slot: req.params.slot }, { pattern: req.body.pattern, name: res.locals.randomWord }, { new: true })
-        .then(() => next())
+        .then((data) => {
+          res.locals.name = data.name;
+          res.locals.pattern = data.pattern;
+          return next();
+        })
         .catch(err => {
           return next(err);
         })

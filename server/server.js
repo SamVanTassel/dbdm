@@ -23,17 +23,17 @@ app.use(express.urlencoded());
 app.use('/memory', memoryRouter);
 
 // route all other calls to 404 error handler
-// app.use((req, res) => res.status(404).json('Endpoint could not be found'));
+app.use((req, res) => res.status(404).json('Endpoint could not be found'));
 
-// // global error handler
-// app.use((err, req, res, next) => {
-//   const defaultErr = {
-//     log: 'A default server error occurred: ' + err,
-//     status: 500,
-//     message: { err: 'Default server error' },
-//   };
-//   const errorObj = Object.assign({}, defaultErr, err);
-//   return res.status(errorObj.status).json(errorObj.message);
-// });
+// global error handler
+app.use((err, req, res, next) => {
+  const defaultErr = {
+    log: 'A default server error occurred: ' + err,
+    status: 500,
+    message: { err: 'Default server error' },
+  };
+  const errorObj = Object.assign({}, defaultErr, err);
+  return res.status(errorObj.status).json(errorObj.message);
+});
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}`))

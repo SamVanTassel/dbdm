@@ -5,10 +5,13 @@ import { loadPattern, deletePatternIfEmpty, generateRandomWord, saveNewPattern, 
 // ON GET REQUEST, LOAD PATTERN
 router.get('/:bank/:slot', 
   loadPattern,
-  (req, res) => res.json({
+  (req, res) => {
+    console.log(res.locals)
+    res.json({
     name: res.locals.name,
     pattern: res.locals.pattern
-  })
+    })
+  }
 );
 
 // ON POST REQUEST, SAVE PATTERN
@@ -18,10 +21,13 @@ router.post('/:bank/:slot',
   generateRandomWord,
   saveNewPattern,
   updatePattern,
-  (req, res) => res.json({
+  (req, res) => {
+    console.log(res.locals)
+  res.json({
     name: res.locals.name,
     pattern: res.locals.pattern
   })
+}
 );
 
 export default router;
