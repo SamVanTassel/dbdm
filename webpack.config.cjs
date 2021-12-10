@@ -15,7 +15,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: require.resolve('babel-loader'),
         options: { 
-          presets: ['@babel/env'],
+          presets: ['@babel/env', '@babel/preset-react',],
           plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(Boolean)
         }
       },
@@ -37,7 +37,7 @@ module.exports = {
       publicPath: '/dist/'
     },
     proxy: {
-      '/api': 'http://localhost:8080'
+      '/memory': 'http://localhost:8080'
     },
     port: 3000,
     hot: true

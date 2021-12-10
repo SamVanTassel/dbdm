@@ -119,7 +119,5 @@ dist
 
 
 # other stuff
-package-lock.json
 proof-of-concept/
-.env
 .git_old/
