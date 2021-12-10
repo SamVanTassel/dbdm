@@ -14,16 +14,16 @@ const App = () => {
   { id: 'SD', mp3: `${urlStart}snare.mp3` },
   { id: 'KD', mp3: `${urlStart}kick.mp3` }];
 
-  useEffect(() => {
-    document.title = `Ding Dang Application`;
-  })
-
   const alterWords = (index, name) => {
     const newWords = [... words];
     if (!name) newWords[index] = 'xxxx';
     else newWords[index] = name;
     changeWords(newWords);
   }
+
+  useEffect(() => {
+    document.title = "dbdm " + words.map((word) => word[0]).join('');
+  })
 
   return (
     <div id="main"> 
