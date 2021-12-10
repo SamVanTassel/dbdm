@@ -9,8 +9,9 @@ const patternSchema = new Schema({
     min: [1, 'slot must be greater than 0'], 
     max: [8, 'there are only 8 slots available'], 
     required: true,
-    unique: true
+    unique: false
   },
+  bank: { type: String, required: true },
   name: String
 })
 

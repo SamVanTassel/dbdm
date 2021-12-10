@@ -17,7 +17,7 @@ mongoose.connect(MONGO_URI, {
 
 // middleware to show us request bodies
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 // route memory calls to memory router
 app.use('/memory', memoryRouter);
@@ -32,6 +32,7 @@ app.use((err, req, res, next) => {
     status: 500,
     message: { err: 'Default server error' },
   };
+  console.log(defaultErr.log);
   const errorObj = Object.assign({}, defaultErr, err);
   return res.status(errorObj.status).json(errorObj.message);
 });
