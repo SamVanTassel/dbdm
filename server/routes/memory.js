@@ -6,7 +6,6 @@ import { loadPattern, deletePatternIfEmpty, generateRandomWord, saveNewPattern, 
 router.get('/:bank/:slot', 
   loadPattern,
   (req, res) => {
-    console.log(res.locals)
     res.json({
     name: res.locals.name,
     pattern: res.locals.pattern
@@ -22,7 +21,6 @@ router.post('/:bank/:slot',
   saveNewPattern,
   updatePattern,
   (req, res) => {
-    console.log(res.locals)
   res.json({
     name: res.locals.name,
     pattern: res.locals.pattern
