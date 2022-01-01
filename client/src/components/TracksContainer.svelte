@@ -1,0 +1,21 @@
+<script>
+  import Track from './Track.svelte';
+
+  export let words;
+  export let tracks;
+  export let changeWords;
+</script>
+
+<div id="tracksContainer">
+  {#each tracks as track, index} 
+    <Track mp3={track.mp3} bank={track.id} {index} {words} {changeWords}/>
+  {/each}
+</div>
+
+<style>
+  #tracksContainer {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+  }
+</style>
