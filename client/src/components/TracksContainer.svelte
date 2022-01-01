@@ -1,6 +1,7 @@
 <script>
   import Track from './Track.svelte';
-
+  
+  export let step;
   export let words;
   export let tracks;
   export let changeWords;
@@ -8,7 +9,7 @@
 
 <div id="tracksContainer">
   {#each tracks as track, index} 
-    <Track mp3={track.mp3} bank={track.id} {index} {words} {changeWords}/>
+    <Track {step} mp3={track.mp3} bank={track.id} {index} {words} {changeWords}/>
   {/each}
 </div>
 

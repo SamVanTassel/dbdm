@@ -1,10 +1,12 @@
 <script>
+  import * as Tone from 'tone';
   import Mute from './Mute.svelte';
   import Clear from './Clear.svelte';
   import Save from './Save.svelte';
   import Load from './Load.svelte';
   import Selectors from './Selectors.svelte';
-
+  
+  export let step;
   export let mp3;
   export let index;
   export let bank;
@@ -44,13 +46,20 @@
     trackIndex: index,
     bank,
   }
+
+  $: player = new Tone.Player(mp3).toDestination();
+  $: pattern.forEach((note, i) => {
+    if (note && step === i) {
+      player.start();
+    }
+  })
 </script>
 
 <div class="track">
   <Mute {bank} {mp3} />
   {#each pattern as note, i }
     <button
-      class={`${i % 4 === 0 ? 'pad4' : 'pad'} ${pattern[i] ? 'active' : null} trackButton`}
+      class={`${i % 4 === 0 ? 'pad4' : 'pad'} ${pattern[i] ? 'active' : null} ${i === step ? 'on' : ''} trackButton`}
       on:click={() => toggleNote(i)} 
       id={i}>
     </button>
@@ -91,6 +100,10 @@
 
   .pad4 {
     background-color:rgb(140, 90, 155);
+  }
+
+  .on {
+    border: 2px wheat solid;
   }
   
   :global(.db,

@@ -6,10 +6,20 @@ It stores up to thirty-two 16-step patterns, 8 per track. As patterns are saved 
 
 ## Tone.js
 
-Currently, DBDM only writes and displays patterns and does not play them back. Pressing what would be the mute button in a standard sequencer playes that drum's sound. Implementing features from the tone.js library to turn the pattern display into a working drum machine is the next goal for this project.
+DBDM plays back patterns in a simple repeating loop of 16 steps, with choices of a few different drum kit sounds. This playback is enabled by Tone.js, whose transport feature provides a consistent tracking source for which step the drum machine is on throughout the app.
 
 ### Audio
 
 Audio samples for drums can be found here : https://github.com/Tonejs/audio/tree/master/drum-samples
 
 They can be accessed in this format: https://tonejs.github.io/audio/drum-samples/CR78/kick.mp3
+
+## Further Development
+
+Universal controls: tempo, swing, effects.
+Per-step controls: velocity, ratchet, probability
+Expanded capabilities: Melodic sequencer in addition to drums
+
+## Known Issues
+
+Changing the kit while drum machine is playing causes a buffer error. Possibly due to async call to get mp3 source for drum sounds, needs more investigation.
