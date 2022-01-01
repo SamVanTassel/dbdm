@@ -6,7 +6,7 @@ It stores up to thirty-two 16-step patterns, 8 per track. As patterns are saved 
 
 ## Tone.js
 
-Currently, DBDM only writes and displays patterns and does not play them back. Pressing what would be the mute button in a standard sequencer playes the drums sound. Implementing features from the tone.js library to turn the pattern display into a working drum machine is the next goal for this project.
+Currently, DBDM only writes and displays patterns and does not play them back. Pressing what would be the mute button in a standard sequencer playes that drum's sound. Implementing features from the tone.js library to turn the pattern display into a working drum machine is the next goal for this project.
 
 ### Audio
 
