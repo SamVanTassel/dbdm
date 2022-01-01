@@ -1,6 +1,12 @@
 <script>
+  import * as Tone from 'tone';
   import TracksContainer from './components/TracksContainer.svelte';
   import Settings from './components/Settings.svelte';
+  
+  let step = 0;
+  Tone.Transport.scheduleRepeat((time) => {
+    step = (step + 1) % 16;
+  }, '8n');
 
   let words = new Array(4).fill('xxxx');
 
@@ -11,12 +17,17 @@
     {name: 'FM', id: '4OP-FM'},
     {name: 'Stark', id: 'Stark'},
     {name: 'Breakbeat', id: 'breakbeat13'},
-    {name: 'One More', id: 'Kit3'},
+    {name: 'Kitty', id: 'Kit3'},
     ]
   let kitIndex = 0;
   let hiddenUp = false;
   let hiddenDown = true;
   const nextKit = () => {
+    let paused = false;
+    if (Tone.Transport.state === 'started') {
+      Tone.Transport.stop();
+      paused = true;
+    }
     if (kitIndex < kits.length - 1) {
       kitIndex += 1;
       hiddenDown = false;
@@ -24,8 +35,14 @@
     if (kitIndex === kits.length - 1) {
       hiddenUp = true;
     }
+    if (paused) Tone.Transport.start();
   }
   const prevKit =() => {
+    let paused = false;
+    if (Tone.Transport.state === 'started') {
+      Tone.Transport.stop();
+      paused = true;
+    }
     if (kitIndex > 0) {
       kitIndex -= 1;
       hiddenUp = false;
@@ -33,6 +50,7 @@
     if (kitIndex === 0) {
       hiddenDown = true;
     }
+    if (paused) Tone.Transport.start();
   }
   $: selectedKit = kits[kitIndex];
 
@@ -64,7 +82,7 @@
 
 <div id="main">
   <h1>DBDM</h1>
-  <TracksContainer {tracks} {words} {changeWords} />
+  <TracksContainer {step} {tracks} {words} {changeWords} />
   <p>{words.join(' . ')}</p>
   <Settings {...settingsProps} />
 </div>
