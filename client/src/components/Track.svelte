@@ -3,6 +3,7 @@
   import Clear from './Clear.svelte';
   import Save from './Save.svelte';
   import Load from './Load.svelte';
+  import Selectors from './Selectors.svelte';
 
   export let mp3;
   export let index;
@@ -18,6 +19,22 @@
   }
   const changePattern = (newPattern) => {
     pattern = newPattern;
+  }
+  let hiddenUp = false;
+  let hiddenDown = true;
+  const increment = () => {
+    if (slot < 8) {
+      slot += 1;
+      hiddenDown = false;
+    }
+    if (slot === 8) hiddenUp = true;
+  }
+  const decrement = () => {
+    if (slot > 1) {
+      slot -= 1;
+      hiddenUp = false;
+    }
+    if (slot === 1) hiddenDown = true;
   }
 
   $: saveLoadProps = {
@@ -41,7 +58,10 @@
   <Clear {changePattern} />
   <Save {...saveLoadProps} {pattern} />
   <Load {...saveLoadProps} {changePattern} />
-  <input type=number bind:value={slot} min=1 max=8>
+  <div class="slotDisplay">
+    <div class="slotNum">{slot}</div>
+    <Selectors {hiddenUp} {hiddenDown} up={increment} down={decrement}/>
+  </div>
 </div>
 
 <style>
@@ -100,13 +120,23 @@
     color:rgb(150, 99, 163);
   }
 
-  input {
-    background: transparent;
-    border: 1px solid rgb(243, 220, 179, .5);
+  .slotDisplay {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    width: 50px;
+    min-width: 35px;
+    background-color:rgb(144, 110, 160);
+    border: 1px solid rgb(243, 220, 179, .25);
     border-radius: 4px;
+    box-shadow: 2px 2px rgba(245, 222, 179, 0.767);
     margin: 2px;
     color: wheat;
-    width: 42px;
     text-align: center;
+    font-size: .9rem;
+  }
+  .slotNum {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 </style>

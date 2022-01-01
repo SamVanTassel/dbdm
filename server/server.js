@@ -22,6 +22,9 @@ mongoose.connect(MONGO_URI, {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// serve favicon
+app.use('/favicon.ico', express.static('../client/public/'));
+
 // route memory calls to memory router
 app.use('/memory', memoryRouter);
 

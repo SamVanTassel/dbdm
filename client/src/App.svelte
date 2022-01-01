@@ -1,17 +1,8 @@
 <script>
   import TracksContainer from './components/TracksContainer.svelte';
-  
+  import Settings from './components/Settings.svelte';
+
   let words = new Array(4).fill('xxxx');
-  let selectedKit = 'CR78';
-
-  $: urlStart = `https://tonejs.github.io/audio/drum-samples/${selectedKit}/`;
-
-  $: tracks = [
-    { id: 'TM', mp3: `${urlStart}tom1.mp3` },
-    { id: 'HH', mp3: `${urlStart}hihat.mp3` },
-    { id: 'SD', mp3: `${urlStart}snare.mp3` },
-    { id: 'KD', mp3: `${urlStart}kick.mp3` }
-  ];
 
   let kits = [
     {name: 'CR78', id: 'CR78'}, 
@@ -20,8 +11,39 @@
     {name: 'FM', id: '4OP-FM'},
     {name: 'Stark', id: 'Stark'},
     {name: 'Breakbeat', id: 'breakbeat13'},
-    {name: 'Whatever', id: 'Kit3'},
+    {name: 'One More', id: 'Kit3'},
     ]
+  let kitIndex = 0;
+  let hiddenUp = false;
+  let hiddenDown = true;
+  const nextKit = () => {
+    if (kitIndex < kits.length - 1) {
+      kitIndex += 1;
+      hiddenDown = false;
+    }
+    if (kitIndex === kits.length - 1) {
+      hiddenUp = true;
+    }
+  }
+  const prevKit =() => {
+    if (kitIndex > 0) {
+      kitIndex -= 1;
+      hiddenUp = false;
+    }
+    if (kitIndex === 0) {
+      hiddenDown = true;
+    }
+  }
+  $: selectedKit = kits[kitIndex];
+
+  $: urlStart = `https://tonejs.github.io/audio/drum-samples/${selectedKit.id}/`;
+
+  $: tracks = [
+    { id: 'TM', mp3: `${urlStart}tom1.mp3` },
+    { id: 'HH', mp3: `${urlStart}hihat.mp3` },
+    { id: 'SD', mp3: `${urlStart}snare.mp3` },
+    { id: 'KD', mp3: `${urlStart}kick.mp3` }
+  ];
 
   $: document.title = `dbdm ${words.map((word) => word[0]).join('')}`;
   const changeWords = (index, name) => {
@@ -31,19 +53,20 @@
     words = newWords;
   };
 
+  $: settingsProps = {
+    selectedKit,
+    nextKit,
+    prevKit,
+    hiddenDown,
+    hiddenUp
+  }
 </script>
 
 <div id="main">
   <h1>DBDM</h1>
   <TracksContainer {tracks} {words} {changeWords} />
   <p>{words.join(' . ')}</p>
-  <select bind:value={selectedKit}>
-    {#each kits as kit}
-      <option value={kit.id}>
-        {kit.name}
-      </option>
-    {/each}
-  </select>
+  <Settings {...settingsProps} />
 </div>
 
 <style global>
