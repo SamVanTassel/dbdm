@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const SveltePreprocess = require('svelte-preprocess');
 const Autoprefixer = require('autoprefixer');
@@ -70,10 +71,15 @@ module.exports = {
     port: 3000,
     hot: true,
   },
+  devtool: false,
   plugins: [
     new HtmlWebpackPlugin({
       template: path.join(__dirname, '/client/public/index.html/'),
       favicon: path.join(__dirname, '/client/public/favicon.ico'),
+    }),
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[file].map',
+      exclude: ['tone'],
     }),
   ],
 };
