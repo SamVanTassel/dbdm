@@ -42,7 +42,6 @@
   $: saveLoadProps = {
     changeWords,
     slot,
-    words,
     trackIndex: index,
     bank,
   }
@@ -66,7 +65,7 @@
     </button>
   {/each}
   <Clear {changePattern} />
-  <Save {...saveLoadProps} {pattern} />
+  <Save {...saveLoadProps} {words} {pattern} />
   <Load {...saveLoadProps} {changePattern} />
   <div class="slotDisplay">
     <div class="slotNum">{slot}</div>
