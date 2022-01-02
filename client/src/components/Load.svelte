@@ -5,7 +5,7 @@
   export let slot;
   export let trackIndex;
   
-  // Helper function to convert data from string to array for react components
+  // Helper function to convert data from string to array for frontend components
   function dataStringToArray(string) {
     const arr = string.split('')
     return arr.map((el) => {

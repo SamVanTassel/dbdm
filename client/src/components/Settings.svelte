@@ -17,11 +17,12 @@
   </div>
     <button on:click|once={() => Tone.start()} on:click={() => {step = 0; Tone.Transport.start()}}>▷</button>
     <button on:click={() => {Tone.Transport.stop(); step = -1}}>☐</button>
+    <p>  Tempo:  {Tone.Transport.bpm.value}</p>
+    <input type="range" min="60" max="200" name="bpm" bind:value={Tone.Transport.bpm.value} step="5">
 </div>
 <style>
   .settings {
     display: flex;
-    
   }
   .kitSelection {
     width: 150px;

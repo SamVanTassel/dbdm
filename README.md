@@ -20,10 +20,18 @@ Universal controls: tempo, swing, effects.
 
 Per-step controls: velocity, ratchet, probability
 
-Expanded capabilities: Melodic sequencer in addition to drums, ability to change number of steps per track to create polyrhythms
+Expanded capabilities: Melodic sequencer in addition to drums, ability to change number of steps per track to create polyrhythms.
 
 ## Known Issues
 
 Starting a player before a player has stopped (setting notes on/off at the wrong time, double-clicking the mute button) leads to app crash. Need to throttle Player.start() calls
 
 Step change is not always consistent, ie tempo changes a bit at seemingly random times. Need to investigate cleanup after stopping/starting tone.transport to ensure there is only one step loop occuring at a time.
+
+# To Do
+
+[] Style tempo slider
+
+[] Add visual signifier to muted channel & mute button
+
+[] Clean up settings styles
