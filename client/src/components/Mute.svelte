@@ -7,4 +7,4 @@
   $: player = new Tone.Player(mp3).toDestination();
 </script>
 
-<button class="mute" on:click={() => player.start() }>{bank}</button>
+<button class="mute" on:click={() => {if (player.loaded) player.start() }}>{bank}</button>

@@ -50,7 +50,7 @@
   $: player = new Tone.Player(mp3).toDestination();
   $: pattern.forEach((note, i) => {
     if (note && step === i) {
-      player.start();
+      if (player.loaded) player.start();
     }
   })
 </script>

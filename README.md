@@ -17,9 +17,13 @@ They can be accessed in this format: https://tonejs.github.io/audio/drum-samples
 ## Further Development
 
 Universal controls: tempo, swing, effects.
+
 Per-step controls: velocity, ratchet, probability
-Expanded capabilities: Melodic sequencer in addition to drums
+
+Expanded capabilities: Melodic sequencer in addition to drums, ability to change number of steps per track to create polyrhythms
 
 ## Known Issues
 
-Changing the kit while drum machine is playing causes a buffer error. Possibly due to async call to get mp3 source for drum sounds, needs more investigation.
+Starting a player before a player has stopped (setting notes on/off at the wrong time, double-clicking the mute button) leads to app crash. Need to throttle Player.start() calls
+
+Step change is not always consistent, ie tempo changes a bit at seemingly random times. Need to investigate cleanup after stopping/starting tone.transport to ensure there is only one step loop occuring at a time.
