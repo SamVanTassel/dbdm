@@ -7,6 +7,7 @@
   export let prevKit;
   export let hiddenDown;
   export let hiddenUp;
+  export let step;
 
 </script>
 <div class="settings">
@@ -14,8 +15,8 @@
   <div class ="kitDisplay"><div>Kit: </div><div>{selectedKit.name}</div></div>
     <Selectors up={nextKit} down={prevKit} {hiddenUp} {hiddenDown} />
   </div>
-    <button on:click|once={() => Tone.start()} on:click={() => Tone.Transport.start()}>▷</button>
-    <button on:click={() => Tone.Transport.stop()}>☐</button>
+    <button on:click|once={() => Tone.start()} on:click={() => {step = 0; Tone.Transport.start()}}>▷</button>
+    <button on:click={() => {Tone.Transport.stop(); step = -1}}>☐</button>
 </div>
 <style>
   .settings {

@@ -3,10 +3,10 @@
   import TracksContainer from './components/TracksContainer.svelte';
   import Settings from './components/Settings.svelte';
   
-  let step = 0;
+  let step = -1;
   Tone.Transport.scheduleRepeat((time) => {
     step = (step + 1) % 16;
-  }, '8n');
+  }, '16n');
 
   let words = new Array(4).fill('xxxx');
 
@@ -84,7 +84,7 @@
   <h1>DBDM</h1>
   <TracksContainer {step} {tracks} {words} {changeWords} />
   <p>{words.join(' . ')}</p>
-  <Settings {...settingsProps} />
+  <Settings bind:step {...settingsProps} />
 </div>
 
 <style global>
