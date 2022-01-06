@@ -7,6 +7,7 @@
   export let prevKit;
   export let hiddenDown;
   export let hiddenUp;
+  export let step;
 
 </script>
 <div class="settings">
@@ -14,13 +15,14 @@
   <div class ="kitDisplay"><div>Kit: </div><div>{selectedKit.name}</div></div>
     <Selectors up={nextKit} down={prevKit} {hiddenUp} {hiddenDown} />
   </div>
-    <button on:click|once={() => Tone.start()} on:click={() => Tone.Transport.start()}>▷</button>
-    <button on:click={() => Tone.Transport.stop()}>☐</button>
+    <button on:click|once={() => Tone.start()} on:click={() => {step = 0; Tone.Transport.start()}}>▷</button>
+    <button on:click={() => {Tone.Transport.stop(); step = -1}}>☐</button>
+    <p>  Tempo:  {Math.floor(Tone.Transport.bpm.value)}</p>
+    <input type="range" min="60" max="200" name="bpm" bind:value={Tone.Transport.bpm.value} step="5">
 </div>
 <style>
   .settings {
     display: flex;
-    
   }
   .kitSelection {
     width: 150px;

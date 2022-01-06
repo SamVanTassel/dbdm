@@ -42,21 +42,21 @@
   $: saveLoadProps = {
     changeWords,
     slot,
-    words,
     trackIndex: index,
     bank,
   }
-
-  $: player = new Tone.Player(mp3).toDestination();
+  let channel = new Tone.Channel();
+  $: player = new Tone.Player(mp3).connect(channel);
   $: pattern.forEach((note, i) => {
     if (note && step === i) {
-      player.start();
+      if (player.loaded) player.start();
     }
   })
+  channel.toDestination();
 </script>
 
 <div class="track">
-  <Mute {bank} {mp3} />
+  <Mute {channel} {bank} />
   {#each pattern as note, i }
     <button
       class={`${i % 4 === 0 ? 'pad4' : 'pad'} ${pattern[i] ? 'active' : null} ${i === step ? 'on' : ''} trackButton`}
@@ -65,7 +65,7 @@
     </button>
   {/each}
   <Clear {changePattern} />
-  <Save {...saveLoadProps} {pattern} />
+  <Save {...saveLoadProps} {words} {pattern} />
   <Load {...saveLoadProps} {changePattern} />
   <div class="slotDisplay">
     <div class="slotNum">{slot}</div>
