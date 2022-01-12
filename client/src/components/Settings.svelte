@@ -21,6 +21,7 @@
     <input type="range" min="60" max="200" name="bpm" bind:value={Tone.Transport.bpm.value} step="5">
 </div>
 <style>
+  /* TO DO: style slider, create container style and make components consistent w/ each other */
   .settings {
     display: flex;
   }
@@ -45,7 +46,7 @@
     font-size: 1.25rem;
     border: 1px solid rgb(243, 220, 179, .25);
     color:rgb(150, 99, 163);
-    background-color: rgba(255, 237, 203, 0.616);
+    background-color: rgba(255, 237, 203);
     box-shadow: 2px 2px rgba(245, 222, 179, 0.767);
   }
 
