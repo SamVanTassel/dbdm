@@ -8,18 +8,9 @@ const isDevelopment = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: './client/src/index.js',
-  mode: 'development',
+  mode: isDevelopment ? 'development' : 'production',
   module: {
     rules: [
-      {
-        test: /\.(jsx?)$/,
-        exclude: /node_modules/,
-        loader: require.resolve('babel-loader'),
-        options: {
-          presets: ['@babel/env', '@babel/preset-react'],
-          plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(Boolean),
-        },
-      },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
