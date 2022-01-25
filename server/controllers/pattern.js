@@ -1,4 +1,5 @@
 import Pattern from '../models/pattern.js';
+import { Step } from '../../Classes.js'
 
 const loadPattern = (req, res, next) => {
   if (res.locals.justDeleted) return next();
@@ -8,7 +9,7 @@ const loadPattern = (req, res, next) => {
   Pattern.findOne(loadSlotInBank)
     .then(found => {
       res.locals = { 
-        pattern: found ? found.pattern : new String('.').repeat(16),
+        pattern: found ? found.pattern : new Array(16).fill('.').map((el) => new Step(false)),
         name: found ? found.name : 'xxxx',
       };
       return next();
@@ -42,7 +43,7 @@ const updatePattern = (req, res, next) => {
   // expects {name, pattern, randomWord, (OPTIONAL alreadySavedNew)} in res.locals
   if (res.locals.alreadySavedNew || res.locals.justDeleted) return next();
   else {
-    if (res.locals.pattern === req.body.pattern) { // IF DOC EXISTS BUT PATTERN IS SAME, DON'T UPDATE
+    if (JSON.stringify(res.locals.pattern) === JSON.stringify(req.body.pattern)) { // IF DOC EXISTS BUT PATTERN IS SAME, DON'T UPDATE
       return next();
     } else {   
       console.log('updating pattern')                       // IF DOC EXISTS AND PATTERN IS DIFFERENT, UPDATE PATTERN AND NAME
@@ -62,12 +63,12 @@ const updatePattern = (req, res, next) => {
 const deletePatternIfEmpty = (req, res, next) => {
   console.log('checking if pattern should be deleted');
   // expects nothing in res.locals
-  if (req.body.pattern === '................') {
+  if (!req.body.pattern.some((el) => el.isOn)) { // if no notes contain are on
     console.log('deleting pattern')
     Pattern.deleteOne({ slot: req.params.slot, bank: req.params.bank })
       .then(() => {
         res.locals = {
-          pattern: new String('.').repeat(16),
+          pattern: new Array(16).fill('.').map((el) => new Step(false)),
           name: 'xxxx',
           justDeleted: true
         };

@@ -1,9 +1,23 @@
 import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
+const stepSchema = new Schema({
+  isOn: {
+    type: Boolean,
+    required: true
+  },
+  volume: Number,
+  ratchet: Number
+})
+
 // define pattern schema
 const patternSchema = new Schema({
-  pattern: { type: String, required: true },
+  pattern: { 
+    type: Array, 
+    items: stepSchema,
+    maxItems: 16,
+    minItems: 16
+  },
   slot: { 
     type: Number, 
     min: [1, 'slot must be greater than 0'], 

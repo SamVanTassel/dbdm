@@ -1,21 +1,20 @@
-<script>
+<script lang='ts'>
   export let changeWords;
-  export let bank;
-  export let slot;
-  export let trackIndex;
+  export let bank: string;
+  export let slot: number;
+  export let trackIndex: number;
   export let pattern;
-  export let words;
+  export let words: string[];
 
-  // Send pattern as string of X's (true) and .'s (false) for server-side legibility and easy comparison
-  const savePattern = (bank, slot, pattern) => {
+  const savePattern = (bank: string, slot: number, pattern) => {
     fetch(`/memory/${bank}/${slot}`, 
       { 
         method: 'POST', 
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({ 
-          'pattern': pattern.join('').replace(/true/g, 'X').replace(/false/g, '.'),
-          name: words[trackIndex]
-        }) 
+          pattern: pattern,
+          name: words[trackIndex] 
+        })
       })
       .then(response => response.json())
       .then(res => {
