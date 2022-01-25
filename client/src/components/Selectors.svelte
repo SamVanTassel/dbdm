@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
   export let up;
   export let down;
   export let hiddenUp;
