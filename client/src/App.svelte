@@ -2,7 +2,7 @@
   import * as Tone from 'tone';
   import TracksContainer from './components/TracksContainer.svelte';
   import Settings from './components/Settings.svelte';
-  
+
   let step: number = -1;
   Tone.Transport.scheduleRepeat((time) => {
     step = (step + 1) % 16;
@@ -55,7 +55,7 @@
   $: selectedKit = kits[kitIndex];
 
   $: urlStart = `https://tonejs.github.io/audio/drum-samples/${selectedKit.id}/`;
-
+  
   $: tracks = [
     { id: 'TM', mp3: `${urlStart}tom1.mp3` },
     { id: 'HH', mp3: `${urlStart}hihat.mp3` },

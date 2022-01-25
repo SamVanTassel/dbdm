@@ -5,15 +5,6 @@
   export let slot;
   export let trackIndex;
   
-  // Helper function to convert data from string to array for frontend components
-  function dataStringToArray(string) {
-    const arr = string.split('')
-    return arr.map((el) => {
-      if (el === 'X') return true;
-      if (el === '.') return false;
-    });
-  };
-
   const loadPattern = (bank, slot) => {
     fetch(`/memory/${bank}/${slot}`)
       .then(response => response.json())
