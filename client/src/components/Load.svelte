@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
   export let changeWords;
   export let changePattern;
   export let bank;
@@ -18,7 +18,7 @@
     fetch(`/memory/${bank}/${slot}`)
       .then(response => response.json())
       .then(res => {
-        changePattern(dataStringToArray(res.pattern));
+        changePattern(res.pattern);
         changeWords(trackIndex, res.name);
       })
       .catch(err => console.log(err));

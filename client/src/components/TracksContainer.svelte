@@ -1,4 +1,4 @@
-<script>
+<script lang='ts'>
   import Track from './Track.svelte';
   
   export let step;

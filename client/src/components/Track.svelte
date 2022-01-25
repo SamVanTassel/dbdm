@@ -1,10 +1,11 @@
-<script>
+<script lang="ts">
   import * as Tone from 'tone';
   import Mute from './Mute.svelte';
   import Clear from './Clear.svelte';
   import Save from './Save.svelte';
   import Load from './Load.svelte';
   import Selectors from './Selectors.svelte';
+  import { Step } from '../../../Classes.js';
   
   export let step;
   export let mp3;
@@ -12,18 +13,21 @@
   export let bank;
   export let words;
   export let changeWords;
+  
+  let pattern: Step[] = new Array(16).fill('.').map((el) => new Step(false));
+  let slot: number = 1;
 
-  let pattern = new Array(16).fill(false);
-  let slot = 1;
-
-  function toggleNote(id) {
-    pattern[id] ? pattern[id] = false : pattern[id] = true;
+  function toggleNote(id: number) {
+    const note = pattern[id];
+    note.isOn = !note.isOn;
+    pattern = [...pattern];
+    console.log(pattern.map(el => el.isOn))
   }
-  const changePattern = (newPattern) => {
+  const changePattern = (newPattern: typeof pattern) => {
     pattern = newPattern;
   }
-  let hiddenUp = false;
-  let hiddenDown = true;
+  let hiddenUp: boolean = false;
+  let hiddenDown: boolean = true;
   const increment = () => {
     if (slot < 8) {
       slot += 1;
@@ -48,7 +52,7 @@
   let channel = new Tone.Channel();
   $: player = new Tone.Player(mp3).connect(channel);
   $: pattern.forEach((note, i) => {
-    if (note && step === i) {
+    if (note.isOn && step === i) {
       if (player.loaded) player.start();
     }
   })
@@ -59,9 +63,9 @@
   <Mute {channel} {bank} />
   {#each pattern as note, i }
     <button
-      class={`${i % 4 === 0 ? 'pad4' : 'pad'} ${pattern[i] ? 'active' : null} ${i === step ? 'on' : ''} trackButton`}
+      class={`${i % 4 === 0 ? 'pad4' : 'pad'} ${pattern[i].isOn ? 'active' : null} ${i === step ? 'on' : ''} trackButton`}
       on:click={() => toggleNote(i)} 
-      id={i}>
+      id="button{i}">
     </button>
   {/each}
   <Clear {changePattern} />

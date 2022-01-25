@@ -1,14 +1,14 @@
-<script>
+<script lang='ts'>
   import * as Tone from 'tone';
   import TracksContainer from './components/TracksContainer.svelte';
   import Settings from './components/Settings.svelte';
   
-  let step = -1;
+  let step: number = -1;
   Tone.Transport.scheduleRepeat((time) => {
     step = (step + 1) % 16;
   }, '16n');
 
-  let words = new Array(4).fill('xxxx');
+  let words: string[] = new Array(4).fill('xxxx');
 
   let kits = [
     {name: 'CR78', id: 'CR78'}, 
@@ -64,7 +64,7 @@
   ];
 
   $: document.title = `dbdm ${words.map((word) => word[0]).join('')}`;
-  const changeWords = (index, name) => {
+  const changeWords = (index: number, name?: string) => {
     const newWords = [...words];
     if (!name) newWords[index] = 'xxxx';
     else newWords[index] = name;
