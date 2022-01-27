@@ -30,8 +30,4 @@ Step change is not always consistent, ie tempo changes a bit at seemingly random
 
 # To Do
 
-[] Style tempo slider
-
 [] Add visual signifier to muted channel & mute button
-
-[] Clean up settings styles
