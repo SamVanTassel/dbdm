@@ -1,8 +1,8 @@
 <script lang='ts'>
   import Track from './Track.svelte';
   
-  export let step;
-  export let words;
+  export let step: number;
+  export let words: string[];
   export let tracks;
   export let changeWords;
 </script>

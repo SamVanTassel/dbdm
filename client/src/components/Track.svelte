@@ -7,15 +7,15 @@
   import Selectors from './Selectors.svelte';
   import { Step } from '../../../Classes.js';
   
-  export let step;
-  export let mp3;
-  export let index;
-  export let bank;
-  export let words;
+  export let step: number;
+  export let mp3: string;
+  export let index: number;
+  export let bank: string;
+  export let words: string[];
   export let changeWords;
   
   let pattern: Step[] = new Array(16).fill('.').map((el) => new Step(false));
-  let slot: number = 1;
+  let slotNum: number = 1;
 
   function toggleNote(id: number) {
     const note = pattern[id];
@@ -29,23 +29,23 @@
   let hiddenUp: boolean = false;
   let hiddenDown: boolean = true;
   const increment = () => {
-    if (slot < 8) {
-      slot += 1;
+    if (slotNum < 8) {
+      slotNum += 1;
       hiddenDown = false;
     }
-    if (slot === 8) hiddenUp = true;
+    if (slotNum === 8) hiddenUp = true;
   }
   const decrement = () => {
-    if (slot > 1) {
-      slot -= 1;
+    if (slotNum > 1) {
+      slotNum -= 1;
       hiddenUp = false;
     }
-    if (slot === 1) hiddenDown = true;
+    if (slotNum === 1) hiddenDown = true;
   }
 
   $: saveLoadProps = {
     changeWords,
-    slot,
+    slotNum,
     trackIndex: index,
     bank,
   }
@@ -57,13 +57,25 @@
     }
   })
   channel.toDestination();
+
+  let isMuted = false;
+  $: toggleMute = () => { 
+    isMuted = !isMuted;
+    channel.mute = !channel.mute;
+  }
+
 </script>
 
 <div class="track">
-  <Mute {channel} {bank} />
+  <Mute {bank} {toggleMute}/>
   {#each pattern as note, i }
     <button
-      class={`${i % 4 === 0 ? 'pad4' : 'pad'} ${pattern[i].isOn ? 'active' : null} ${i === step ? 'on' : ''} trackButton`}
+      class={`
+        ${i % 4 === 0 ? 'pad4' : 'pad'} 
+        ${pattern[i].isOn ? 'active' : null} 
+        ${i === step ? 'on' : ''} trackButton
+        ${isMuted ? 'muted' : ''}
+        `}
       on:click={() => toggleNote(i)} 
       id="button{i}">
     </button>
@@ -72,12 +84,13 @@
   <Save {...saveLoadProps} {words} {pattern} />
   <Load {...saveLoadProps} {changePattern} />
   <div class="slotDisplay">
-    <div class="slotNum">{slot}</div>
+    <div class="slotNum">{slotNum}</div>
     <Selectors {hiddenUp} {hiddenDown} up={increment} down={decrement}/>
   </div>
 </div>
 
-<style>
+<style lang="scss">
+  @import "../styles.scss";
   .track {
     display: flex;
     justify-content: center;
@@ -89,7 +102,7 @@
     width: 50px;
     border-radius: 4px;
     margin: 2px;
-    box-shadow: 2px 2px wheat;
+    box-shadow: 2px 2px $wheat-main;
   }
 
   .pad, 
@@ -98,26 +111,26 @@
     max-width: 50px;
     flex-basis: 100%;
     border-style: none;
-    background-color:rgb(150, 99, 163);
-    color: wheat;
+    background-color: $pad-background;
+    color: $wheat-main;
   }
 
   .pad4 {
-    background-color:rgb(140, 90, 155);
+    background-color:$pad4-background;
   }
 
   .on {
-    border: 2px wheat solid;
+    border: 2px $wheat-main solid;
   }
   
   :global(.db,
   .mute) {
     font-size: .75rem;
     font-style: italic;
-    border: 1px solid rgb(243, 220, 179, .25);
-    background-color:rgb(144, 110, 160);
-    color: rgba(255, 237, 203, 0.616);
-    box-shadow: 2px 2px rgba(245, 222, 179, 0.767);
+    border: 1px solid $wheat-border-very-light;
+    background-color:$background-main;
+    color: $button-text-wheat;
+    box-shadow: 2px 2px $wheat-box-shadow-light;
   }
 
   :global(.mute:hover,
@@ -133,8 +146,19 @@
   .pad4:active,
   .active {
     box-shadow: 1px 1px;
-    background-color: wheat;
-    color:rgb(150, 99, 163);
+    background-color: $wheat-main;
+  }
+
+  :global(.muted) {
+    &.pad {
+      background-color: $pad-muted !important;
+    }
+    &.pad4 {
+      background-color: $pad4-muted !important;
+    }
+    &.active {
+      background-color: $active-muted !important;
+    }
   }
 
   .slotDisplay {
@@ -142,12 +166,12 @@
     grid-template-columns: 2fr 1fr;
     width: 50px;
     min-width: 35px;
-    background-color:rgb(144, 110, 160);
-    border: 1px solid rgb(243, 220, 179, .25);
+    background-color:$background-main;
+    border: 1px solid $wheat-border-very-light;
     border-radius: 4px;
-    box-shadow: 2px 2px rgba(245, 222, 179, 0.767);
+    box-shadow: 2px 2px $wheat-box-shadow-light;
     margin: 2px;
-    color: wheat;
+    color: $wheat-main;
     text-align: center;
     font-size: .9rem;
   }

@@ -1,9 +1,9 @@
 <script lang='ts'>
   export let changeWords;
   export let changePattern;
-  export let bank;
-  export let slot;
-  export let trackIndex;
+  export let bank: string;
+  export let slotNum: number;
+  export let trackIndex: number;
   
   const loadPattern = (bank, slot) => {
     fetch(`/memory/${bank}/${slot}`)
@@ -16,4 +16,4 @@
   }
 </script>
 
-<button class="db" on:click={() => loadPattern(bank, slot)}>LOAD</button>
+<button class="db" on:click={() => loadPattern(bank, slotNum)}>LOAD</button>

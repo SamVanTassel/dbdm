@@ -87,8 +87,9 @@
   <Settings bind:step {...settingsProps} />
 </div>
 
-<style global>
-  @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,700;1,700&display=swap');
+<style global lang="scss">
+  @import "./styles.scss";
+
   html {
     box-sizing: border-box;
     height: 100%;
@@ -98,15 +99,15 @@
     display: flex;
     flex-direction: column;
     min-height: 100%;
-    font-family: 'Kanit', sans-serif;
-    background: rgb(144,110,160);
-    background: linear-gradient(180deg, rgb(129, 95, 145) 0%, rgba(144,110,160,1) 20%, rgba(144,110,160,1) 70%, rgb(129, 95, 145) 100%);
+    font-family: $text;
+    background: $background-main;
+    background: linear-gradient(180deg, $background-dark 0%, $background-main 20%, $background-main 70%, $background-dark 100%);
   }
   h1 {
     font-size: 6rem;
     margin: .5rem;
     padding: .25rem;
-    text-shadow: 4px 4px rgb(129, 95, 145);
+    text-shadow: 4px 4px $background-dark;
   }
   body:before {
     content: '';
@@ -125,13 +126,13 @@
   }
   #main {
     width: 95%;
-    background-color: rgb(144,110,160);
-    color: wheat;
+    background-color: $background-main;
+    color: $wheat-main;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-radius: 25px;
-    box-shadow: 2px 2px 4px rgb(129, 95, 145), -2px -2px 4px rgb(129, 95, 145);
+    box-shadow: 2px 2px 4px $background-dark, -2px -2px 4px $background-dark;
     max-width: 1350px;
   }
 </style>

@@ -1,13 +1,13 @@
 <script lang='ts'>
   export let changeWords;
   export let bank: string;
-  export let slot: number;
+  export let slotNum: number;
   export let trackIndex: number;
   export let pattern;
   export let words: string[];
 
-  const savePattern = (bank: string, slot: number, pattern) => {
-    fetch(`/memory/${bank}/${slot}`, 
+  const savePattern = (bank: string, slotNum: number, pattern) => {
+    fetch(`/memory/${bank}/${slotNum}`, 
       { 
         method: 'POST', 
         headers: {'Content-Type': 'application/json'},
@@ -27,6 +27,6 @@
 
 <button 
   class="db" 
-  on:click={() => savePattern(bank, slot, pattern)}>
+  on:click={() => savePattern(bank, slotNum, pattern)}>
   SAVE
 </button>
