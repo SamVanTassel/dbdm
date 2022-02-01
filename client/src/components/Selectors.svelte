@@ -11,7 +11,8 @@
   <button class="selectButton" class:hiddenDown on:click={down}>▼</button>
 </div>
 
-<style>
+<style lang="scss">
+  @import "../styles.scss";
   .selectors {
     grid-column: 2;
   }
@@ -21,7 +22,7 @@
     background: none;
     border: none;
     box-shadow: none;
-    color: wheat;
+    color: $wheat-main;
   }
   .hiddenUp {
     color: transparent;
