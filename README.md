@@ -30,8 +30,6 @@ Step change is not always consistent, ie tempo changes a bit at seemingly random
 
 # To Do
 
-[] Add visual signifier to muted channel & mute button
-
 [] Convert to serverless, deploy full functionality to Vercel
 
 [] Create per-step modal
