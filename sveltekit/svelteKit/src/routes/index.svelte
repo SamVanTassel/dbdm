@@ -27,14 +27,8 @@
     Tone.start();
     synth = new Tone.MonoSynth();
   });
-  
-  // setContext('step', step);
-  // setContext('loaded', loaded);
-
-  console.log(Svelte.hasContext('loaded'));
 
   const playPause = () => {
-    console.log(Tone.Transport)
     if (Tone.Transport.state === 'started') {
       Tone.Transport.stop();
     } else {

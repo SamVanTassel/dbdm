@@ -16,7 +16,6 @@
   let words: string[] = new Array(4).fill('xxxx');
   onMount(async () => {
     document.title = `dbdm ${words.map((word) => word[0]).join('')}`;
-    console.log(step)
   });
 
   let kits = [
