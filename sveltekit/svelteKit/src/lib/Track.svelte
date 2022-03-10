@@ -5,7 +5,7 @@
   import Load from './buttons/Load.svelte';
   import Selectors from './utils/Selectors.svelte';
   import { Step } from '../../../../Classes.js';
-import { onMount } from 'svelte';
+  import { onMount } from 'svelte';
   
   export let step: number;
   export let mp3: string;
@@ -21,7 +21,6 @@ import { onMount } from 'svelte';
     const note = pattern[id];
     note.isOn = !note.isOn;
     pattern = [...pattern];
-    console.log(pattern.map(el => el.isOn))
   }
   const changePattern = (newPattern: typeof pattern) => {
     pattern = newPattern;
