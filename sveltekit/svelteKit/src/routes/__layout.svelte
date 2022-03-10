@@ -1,8 +1,8 @@
 <script lang="ts">
 	import Header from '$lib/header/Header.svelte';
-	import '../app.css';
 </script>
-
+<a href ='/melodic'>Melodic</a>
+<a href ='/'>Rhythmic</a>
 <Header />
 
 <main>
@@ -13,7 +13,8 @@
 	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
 </footer> -->
 
-<style>
+<style lang="scss">
+	@import "../styles.scss";
 	main {
 		flex: 1;
 		display: flex;
