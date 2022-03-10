@@ -2,10 +2,10 @@
   import * as Tone from 'tone';
   import TracksContainer from '../../lib/TracksContainer.svelte';
   import Settings from '../../lib/Settings.svelte';
-  import { onMount, getContext, hasContext } from 'svelte';
+  import { onMount } from 'svelte';
   import { toneData } from '$lib/utils/globalData'
 
-  let step: Number = -1;
+  let step: number = -1;
   let loaded: boolean = false;
 
   toneData.subscribe(data => {
