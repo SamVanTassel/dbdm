@@ -1,6 +1,4 @@
 <script lang='ts'>
-import { onMount } from 'svelte';
-
   import * as Tone from 'tone';
   import Selectors from './utils/Selectors.svelte';
 
@@ -10,11 +8,8 @@ import { onMount } from 'svelte';
   export let hiddenDown: boolean;
   export let hiddenUp: boolean;
   export let step: number;
-
-  // onMount(async() => {
-    // import?
-  // })
 </script>
+
 <div class="settings">
   <div class="kitSelection">
   <div class ="kitDisplay"><div>Kit: </div><div>{selectedKit.name}</div></div>
