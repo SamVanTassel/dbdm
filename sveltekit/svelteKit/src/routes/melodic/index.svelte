@@ -1,5 +1,7 @@
 <script lang="ts">
   import { toneData } from '$lib/utils/globalData'
+  import Settings from '$lib/Settings.svelte'
+  import { TonalStep } from '../../../../../Classes.js';
 
   let step: Number = -1;
   let loaded: boolean = false;
@@ -9,21 +11,26 @@
     loaded = data.loaded;
   });
 
-const blocks = new Array(16).fill('X');
+  const tonalSteps = new Array(16).fill('').map(el => new TonalStep());
+
+  $: tonalSteps.forEach((tonalStep, i) => {
+    if (tonalStep.note && step === i) {
+      // console.log(i)
+    }
+  })
+
 </script>
 
-{#if loaded}
-<h1>New Page</h1>
-{step}
-{/if}
+  <h1>temp</h1>
 
 <main class="grid">
-  {#each blocks as block}
-  <button class="bigButton">{block}</button>
+  {#each tonalSteps as tonalStep, i}
+    <button class={`bigButton ${i === step ? 'on' : ''}`}>{tonalStep.note}</button>
   {/each}
 </main>
-
-<h3>{step}</h3>
+<!-- {#if loaded} 
+    <Settings bind:step />
+  {/if} -->
 
 <style lang="scss">
   main {
@@ -42,4 +49,7 @@ const blocks = new Array(16).fill('X');
     background-color: rgb(201, 110, 77);
     border-radius: 5px;
   }
+  .on {
+      background-color: rgb(240, 179, 99);
+    }
 </style>
