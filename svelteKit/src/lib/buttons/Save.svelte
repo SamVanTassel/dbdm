@@ -16,8 +16,12 @@
           name: words[trackIndex] 
         })
       })
-      .then(response => response.json())
+      .then(response => {
+        console.log(response)
+        response.json()
+      })
       .then(res => {
+        console.log(res);
         if (res.name) changeWords(trackIndex, res.name)
         else changeWords(trackIndex, 'xxxx');
       })

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { toneData, instruments } from '$lib/utils/globalData'
-  import { TonalStep } from '../../../../../Classes.js';
+  import { TonalStep } from '../../../../Classes.js';
   import { onMount } from 'svelte';
 
   let step: number = -1;

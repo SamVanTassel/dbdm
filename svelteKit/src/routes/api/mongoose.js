@@ -2,7 +2,11 @@
 // Import the dependency.
 import mongoose from 'mongoose';
 import PatternSchema from './models/pattern.js'
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.dccrw.mongodb.net/dbdm?retryWrites=true&w=majority`;
+
+import.meta.env.VITE_DB_USERNAME;
+import.meta.env.VITE_DB_PASSWORD;
+
+const uri = `mongodb+srv://test:amuchlongertestpassword@cluster0.dccrw.mongodb.net/dbdm?retryWrites=true&w=majority`;
 const options = {
    useUnifiedTopology: true,
    useNewUrlParser: true,
@@ -22,7 +26,7 @@ const connect = async function() {
 export default async (req, res) => {
   // Get the MongoClient by calling await on the promise.
   // Because it is a promise, it will only resolve once.
-  const Pattern = await connect().model('Pattern', PatternSchema)
+  let pool = await connect()
   // Use the client to return the name of the connected database.
-  return Pattern;
+  return pool.model('Pattern', PatternSchema)
 }

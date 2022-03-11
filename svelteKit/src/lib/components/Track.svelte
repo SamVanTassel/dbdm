@@ -4,7 +4,7 @@
   import Save from '../buttons/Save.svelte';
   import Load from '../buttons/Load.svelte';
   import Selectors from '../utils/Selectors.svelte';
-  import { Step } from '../../../../../Classes.js';
+  import { Step } from '../../../../Classes.js';
   import { onMount } from 'svelte';
   
   export let step: number;
