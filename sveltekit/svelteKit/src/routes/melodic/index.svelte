@@ -1,19 +1,28 @@
 <script lang="ts">
-  import { toneData } from '$lib/utils/globalData'
+  import { toneData, instruments } from '$lib/utils/globalData'
   import Settings from '$lib/Settings.svelte'
   import { TonalStep } from '../../../../../Classes.js';
+  import { onMount } from 'svelte';
+  import { MonoSynth } from 'tone';
 
   let step: number = -1;
   let loaded: boolean = false;
+  let synth = null;
 
+  onMount(() => {
+    instruments.subscribe(data => {
+      synth = data.synth;
+    });
+    toneData.subscribe(data => {
+      step = data.step;
+      loaded = data.loaded;
+    });
+  })
   const playbackStyles: string[] = ['standard', 'reverse', 'top-to-bottom', 'bottom-to-top', 'snake', 'random'];
   let playbackStyleIndex = 0;
   let snakeIn = true; // flag for snake pattern
   
-  toneData.subscribe(data => {
-    step = data.step;
-    loaded = data.loaded;
-  });
+  
   $: funkyStep = step;
 
   $: switch (playbackStyles[playbackStyleIndex]) {
@@ -73,11 +82,14 @@
       funkyStep = step;
       break;
   }
-
-  const tonalSteps = new Array(16).fill('').map(el => new TonalStep());
+  const notes = ['C4', null, null, 'A4', null, 'C4', 'G3', 'A3', 'C3', null, null, 'B3', 'G4', null, null, 'D4']
+  const tonalSteps = notes.map(note => new TonalStep(note));
+  
+  const testSynth = new MonoSynth().toDestination();
 
   $: tonalSteps.forEach((tonalStep, i) => {
     if (tonalStep.note && funkyStep === i) {
+      testSynth.triggerAttack(tonalStep.note, '32n')
     }
   })
 

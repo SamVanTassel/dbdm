@@ -8,14 +8,13 @@
   let step: number = -1;
   let loaded: boolean = false;
 
-  toneData.subscribe(data => {
-    step = data.step;
-    loaded = data.loaded;
-  });
-
   let words: string[] = new Array(4).fill('xxxx');
   onMount(async () => {
     document.title = `dbdm ${words.map((word) => word[0]).join('')}`;
+    toneData.subscribe(data => {
+      step = data.step;
+      loaded = data.loaded;
+    });
   });
 
   let kits = [
@@ -95,5 +94,3 @@
   <Settings bind:step {...settingsProps} />
   {/if}
 </div>
-
-<h3>{step}</h3>

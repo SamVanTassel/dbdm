@@ -1,8 +1,6 @@
 <script lang='ts'>
-  import { onMount, setContext } from 'svelte';
-  import { toneData } from '$lib/utils/globalData';
-
-  import * as Svelte from 'svelte';
+  import { onMount } from 'svelte';
+  import { toneData, instruments } from '$lib/utils/globalData';
   import * as Tone from 'tone';
   import SoundEditor from '../lib/SoundEditor.svelte'
   
@@ -10,12 +8,15 @@
   let step: Number = -1;
   let loaded: boolean = false;
 
-  toneData.subscribe(data => {
-    step = data.step;
-    loaded = data.loaded;
-  });
-
 	onMount(() => {
+    toneData.subscribe(data => {
+      step = data.step;
+      loaded = data.loaded;
+    });
+    instruments.subscribe(data => {
+      synth = data.synth;
+    })
+
     Tone.Transport.scheduleRepeat(() => {
       toneData.update(data => { 
         return {
@@ -25,7 +26,6 @@
     })
     }, '16n');
     Tone.start();
-    synth = new Tone.MonoSynth();
   });
 
   const playPause = () => {

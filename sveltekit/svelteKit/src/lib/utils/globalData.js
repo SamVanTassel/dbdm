@@ -1,4 +1,5 @@
 import { writable } from 'svelte/store'
+import { MonoSynth } from 'tone'
 
 const toneData = writable(
   {
@@ -6,4 +7,10 @@ const toneData = writable(
     loaded: false
 })
 
-export { toneData }
+const instruments = writable(
+  {
+    synth: new MonoSynth()
+  }
+)
+
+export { toneData, instruments }
