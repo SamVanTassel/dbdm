@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { toneData, instruments } from '$lib/utils/globalData';
   import * as Tone from 'tone';
-  import SoundEditor from '../lib/SoundEditor.svelte'
+  import SoundEditor from '../lib/components/SoundEditor.svelte'
   
   let synth: any;
   let step: Number = -1;
@@ -10,22 +10,24 @@
 
 	onMount(() => {
     toneData.subscribe(data => {
-      step = data.step;
-      loaded = data.loaded;
-    });
-    instruments.subscribe(data => {
-      synth = data.synth;
-    })
-
-    Tone.Transport.scheduleRepeat(() => {
-      toneData.update(data => { 
-        return {
-          step: (data.step + 1) % 16,
-          loaded: true
-        }
-    })
-    }, '16n');
-    Tone.start();
+        step = data.step;
+        loaded = data.loaded;
+      });
+      instruments.subscribe(data => {
+        synth = data.synth;
+      })
+    if (!loaded) {    
+      // start the global Transport
+      Tone.Transport.scheduleRepeat(() => {
+        toneData.update(data => { 
+          return {
+            step: (data.step + 1) % 16,
+            loaded: true
+          }
+      })
+      }, '16n');
+      Tone.start();
+    }
   });
 
   const playPause = () => {

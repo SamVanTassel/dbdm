@@ -1,9 +1,7 @@
 <script lang="ts">
   import { toneData, instruments } from '$lib/utils/globalData'
-  import Settings from '$lib/Settings.svelte'
   import { TonalStep } from '../../../../../Classes.js';
   import { onMount } from 'svelte';
-  import { MonoSynth } from 'tone';
 
   let step: number = -1;
   let loaded: boolean = false;
@@ -22,9 +20,7 @@
   let playbackStyleIndex = 0;
   let snakeIn = true; // flag for snake pattern
   
-  
   $: funkyStep = step;
-
   $: switch (playbackStyles[playbackStyleIndex]) {
     case 'reverse':
       funkyStep = 15 - step;
@@ -82,14 +78,13 @@
       funkyStep = step;
       break;
   }
+  const mPentNotes = ['A4', null, 'C4', null, 'D4', null, 'G4', null, 'A4', null, 'C5', null, 'D5', null, 'G5', null]
   const notes = ['C4', null, null, 'A4', null, 'C4', 'G3', 'A3', 'C3', null, null, 'B3', 'G4', null, null, 'D4']
-  const tonalSteps = notes.map(note => new TonalStep(note));
-  
-  const testSynth = new MonoSynth().toDestination();
+  const tonalSteps = mPentNotes.map(note => new TonalStep(note));
 
   $: tonalSteps.forEach((tonalStep, i) => {
     if (tonalStep.note && funkyStep === i) {
-      testSynth.triggerAttack(tonalStep.note, '32n')
+      synth.triggerAttackRelease(tonalStep.note, '32n')
     }
   })
 
@@ -99,12 +94,11 @@
 
 </script>
 
-<h2>temp</h2>
 <button class="playbackSwap" on:click={switchPlayback}>Funk it up</button>
 {playbackStyles[playbackStyleIndex]}
 <main class="grid">
   {#each tonalSteps as tonalStep, i}
-    <button class={`bigButton ${i === funkyStep ? 'on' : ''}`}>{tonalStep.note}</button>
+    <button class={`bigButton ${i === funkyStep ? 'on' : ''}`}>{tonalStep.note ? tonalStep.note : ''}</button>
   {/each}
 </main>
 

@@ -1,6 +1,6 @@
 <script lang='ts'>
   import * as Tone from 'tone';
-  import Selectors from './utils/Selectors.svelte';
+  import Selectors from '../utils/Selectors.svelte';
 
   export let selectedKit;
   export let nextKit;
@@ -28,7 +28,7 @@
 </div>
 
 <style lang="scss">
-  @import "../styles.scss";
+  @import "../../styles.scss";
   .settings {
     display: flex;
     width: 80%;

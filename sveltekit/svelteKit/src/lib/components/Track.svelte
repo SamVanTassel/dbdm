@@ -1,10 +1,10 @@
 <script lang="ts">
-  import Mute from './buttons/Mute.svelte';
-  import Clear from './buttons/Clear.svelte';
-  import Save from './buttons/Save.svelte';
-  import Load from './buttons/Load.svelte';
-  import Selectors from './utils/Selectors.svelte';
-  import { Step } from '../../../../Classes.js';
+  import Mute from '../buttons/Mute.svelte';
+  import Clear from '../buttons/Clear.svelte';
+  import Save from '../buttons/Save.svelte';
+  import Load from '../buttons/Load.svelte';
+  import Selectors from '../utils/Selectors.svelte';
+  import { Step } from '../../../../../Classes.js';
   import { onMount } from 'svelte';
   
   export let step: number;
@@ -96,7 +96,7 @@
 </div>
 
 <style lang="scss">
-  @import "../styles.scss";
+  @import "../../styles.scss";
   .track {
     display: flex;
     justify-content: center;

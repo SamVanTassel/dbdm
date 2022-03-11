@@ -1,7 +1,7 @@
 <script lang='ts'>
   import * as Tone from 'tone';
-  import TracksContainer from '../../lib/TracksContainer.svelte';
-  import Settings from '../../lib/Settings.svelte';
+  import TracksContainer from '../../lib/components/TracksContainer.svelte';
+  import Settings from '../../lib/components/Settings.svelte';
   import { onMount } from 'svelte';
   import { toneData } from '$lib/utils/globalData'
 
