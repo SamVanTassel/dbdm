@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
-const { Schema } = mongoose;
 
-const stepSchema = new Schema({
+const StepSchema = new mongoose.Schema({
   isOn: {
     type: Boolean,
     required: true
@@ -11,10 +10,10 @@ const stepSchema = new Schema({
 })
 
 // define pattern schema
-const patternSchema = new Schema({
+const PatternSchema = new mongoose.Schema({
   pattern: { 
     type: Array, 
-    items: stepSchema,
+    items: StepSchema,
     maxItems: 16,
     minItems: 16
   },
@@ -30,5 +29,5 @@ const patternSchema = new Schema({
 })
 
 // export model compiled from schema
-export default patternSchema;
+export default mongoose.models.Pattern || mongoose.model('Pattern', PatternSchema);
 
